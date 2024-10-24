@@ -1,0 +1,78 @@
+---
+layout: base
+---
+
+<div class="flex justify-center md:pt-8 w-full md:w-4/5 mx-auto fadeIn">
+  <div class="flex flex-col md:flex-row items-center">
+    <div class="md:basis-4/6">
+      <h1 class="text-2xl md:text-4xl xl:text-5xl text-center py-6 md:p-6">{{page.title}}</h1>
+      <div class="flex flex-wrap justify-center gap-4">
+        {% for tag in page.tags %}
+        <a class="text-sm text-slate-700 underline md:no-underline hover:underline dark:text-slate-100/80" href="{{ '/tags#' | append: tag | relative_url }}">#{{tag}}</a>
+        {% endfor %}
+      </div>
+      <div class="flex justify-center items-center gap-2 pt-4">
+        <span class="text-slate-700 dark:text-slate-100/80">{{page.author | default: site.author }}</span>
+        <p class="text-slate-700 dark:text-slate-100/80">{{ page.date | date: "%d-%m-%Y" }}</p>
+      </div>
+      <div class="mx-auto p-4">
+        {% include sharing.html %}
+      </div>
+    </div>
+    <img src="{{ page.image | relative_url }}" alt="" class="basis-2/6  w-11/12 md:w-5/12 p-2 md:px-0">
+  </div>
+</div>
+
+<div class="mx-auto py-4 md:py-12 fadeIn">
+  <div class="flex justify-center pb-4 md:pb-8">
+    <article class="prose md:prose-lg prose-p:font-extralight prose-headings:font-light prose-slate dark:prose-invert prose-img:mx-auto prose-img:w-2/3">
+      {{ content }}
+    </article>
+  </div>
+
+  <div class="mx-auto my-10">
+    {% include sharing.html %}
+  </div>
+
+  <div class="post-navigation py-8 flex flex-col md:flex-row-reverse justify-center ">
+    {% if page.next %}
+    <a class="next-post mx-auto transition hover:scale-110 duration-300" href="{{ page.next.url | relative_url }}">
+      <div class="flex flex-row items-center py-4 md:py-8">
+        <div class="px-2">
+          <span class="text-md text-black dark:text-white font-bold max-w-sm">{{page.next.title}}</span>
+        </div>
+        <svg class="w-6 md:w-12 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" transform="rotate(180)">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path d="M16.1795 3.26875C15.7889 2.87823 15.1558 2.87823 14.7652 3.26875L8.12078 9.91322C6.94952 11.0845 6.94916 12.9833 8.11996 14.155L14.6903 20.7304C15.0808 21.121 15.714 21.121 16.1045 20.7304C16.495 20.3399 16.495 19.7067 16.1045 19.3162L9.53246 12.7442C9.14194 12.3536 9.14194 11.7205 9.53246 11.33L16.1795 4.68297C16.57 4.29244 16.57 3.65928 16.1795 3.26875Z"></path>
+          </g>
+        </svg>
+      </div>
+    </a>
+    {% endif %}
+
+    {% if page.previous %}
+    <a class="previous-post mx-auto transition hover:scale-110 duration-300" href="{{ page.previous.url | relative_url }}">
+      <div class="flex flex-row items-center py-4 md:py-8">
+        <svg class="w-6 md:w-12 fill-current " viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path d="M16.1795 3.26875C15.7889 2.87823 15.1558 2.87823 14.7652 3.26875L8.12078 9.91322C6.94952 11.0845 6.94916 12.9833 8.11996 14.155L14.6903 20.7304C15.0808 21.121 15.714 21.121 16.1045 20.7304C16.495 20.3399 16.495 19.7067 16.1045 19.3162L9.53246 12.7442C9.14194 12.3536 9.14194 11.7205 9.53246 11.33L16.1795 4.68297C16.57 4.29244 16.57 3.65928 16.1795 3.26875Z"></path>
+          </g>
+        </svg>
+        <div class="px-2">
+          <span class="text-md text-black dark:text-white font-bold max-w-sm">{{page.previous.title}}</span>
+        </div>
+      </div>
+    </a>
+    {% endif %}
+  </div>
+
+  {%- if site.disqus.shortname -%}
+    <div class="mx-auto max-w-prose py-8">
+      {%- include disqus_comments.html -%}
+    </div>
+  {%- endif -%}
+</div>

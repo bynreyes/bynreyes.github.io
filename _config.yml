@@ -1,0 +1,23 @@
+domain: bynreyes.github.io
+url: https://bynreyes.github.io
+baseurl: "/octo-guacamole"
+
+title: octo-guacamole
+email: wind@example.com
+author: nreyes
+
+lang: en
+
+plugins:
+  - jekyll-seo-tag
+
+color: "#13ccf9"
+# disqus:
+#   shortname: example-com
+#
+rrss:
+  email: "example@example.cl"
+  telegram: "https://t.me/"
+  discord: "https://discord.com/"
+
+future: true

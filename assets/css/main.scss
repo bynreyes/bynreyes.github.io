@@ -1,0 +1,30 @@
+---
+---
+
+@font-face {
+  font-family: 'Adamina';
+  src: url({{ "/assets/Adamina/Adamina-Regular.ttf" | relative_url }});
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenSans';
+  src: url({{ "/assets/Open_Sans/static/OpenSans-Regular.ttf" | relative_url }});
+  font-display: swap;
+}
+
+$primary_color: {{ site.color | default: "#a505f0" }};
+
+.share-button {
+   background-color: $primary_color;
+   border-color: $primary_color;
+    opacity: 0.9;
+    &:hover {
+      opacity: 1;
+    }
+}
+
+h1 {
+   text-decoration-color: $primary_color;
+   text-decoration-line: underline;
+}
