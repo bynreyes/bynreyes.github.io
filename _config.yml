@@ -6,7 +6,7 @@ title: octo-guacamole
 email: wind@example.com
 author: nreyes
 
-lang: en
+lang: es
 
 plugins:
   - jekyll-seo-tag

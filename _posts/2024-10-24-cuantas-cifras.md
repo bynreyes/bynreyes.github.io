@@ -61,7 +61,7 @@ print()
 
 ````
 ### List Coprehension
-En realidad 
+Los List conprehensions tienen su toque de magia, sonestructuras optimizadas, por lo que son bestialmente rapidas
 
 ````python
 n = int(input("digite un numero "))
@@ -104,3 +104,9 @@ print(f'list comprehension: {li}')
 print()
 print(f'takewhile: El numero {n}, es numero de {len(li)} cifras')
 ````
+
+### pendiente
+- map, filter
+
+### concluciones
+> no dejes que castren tu imaginación
