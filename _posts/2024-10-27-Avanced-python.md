@@ -67,7 +67,6 @@ Este módulo implementa un número de piezas básicas iterator inspiradas en con
 - combinations_with_replacement()
 
 ## Bibliográfia
-- https://docs.python.org/3/library/itertools.html
-- https://realpython.com/python-itertools/
-- http://aprendehaskell.es
-- https://github.com/aulasoftwarelibre
+- [python](https://docs.python.org/3/library/itertools.html)
+- [Haskell](http://aprendehaskell.es)
+- [aulasoftwarelibre](https://github.com/aulasoftwarelibre)

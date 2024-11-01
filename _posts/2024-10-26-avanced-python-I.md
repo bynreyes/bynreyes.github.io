@@ -16,7 +16,7 @@ comments: true
 
 Me gusta mucho la programación funcional, y cada vez que se toca el tema, es necesario entonces, hablar de las Lambda functions, map, filter, y reduce, cuatro bestias que nno tienen equivalente en los lenguajes imperativos clásicos de ayer. 
 
-Hoy en dia, la situación es diferente, pues los lenguajes imperativos (Java, C#), son mas flexibles, han evolucionado para estar a la altura de los requeriientos de la industria actual. En este tutorial, exploraremos algunos conceptos y técnicas avanzadas de Python con Google Colab, por lo que te pido un poco de paciencia, ve por cafe y adelante.
+Hoy en dia, la situación es diferente, pues los lenguajes imperativos (Java, C#), son mas flexibles, han evolucionado para estar a la altura de los requerimientos de la industria actual. En este tutorial, exploraremos algunos conceptos y técnicas avanzadas de Python con Google Colab, por lo que te pido un poco de paciencia, ve por cafe y adelante.
 
 ## Sección 1: Técnicas avanzadas de Python
 
@@ -56,20 +56,40 @@ Las funciones lambda pueden aceptar cualquier cantidad de argumentos, pero solo 
 
 ## Map, Filter, and Reduce Functions
 
-Dejame y te cuento un poco de historia, en tiempos preteritos, los lenguajes solo poseian los siguientes mecanismos:
+Dejame y te cuento un poco de historia, antes de hablar de map, fiter y reduce. En tiempos preteritos, los lenguajes de programación, solo poseian los siguientes mecanismos:
 - instrucciones secuenciales
-- Mecanismos de decision (if-else)
+- Mecanismos de bifurcación (if-else)
 - Bucles (for, while)
 
-solo esas tres cosas son suficientes para desarrollar un programa exacto y legible, nada de intrucciones **go to, breack, continue**, ahora surge una pregunta, ¿ Es posible cambiar el estado de un programa sin recurrir a un bucle for o while?, aunque sinceramente, yo no pueda vivir sin un for in, te cuento que un mundo mejor si es posible, debes saber, que en el mundo de la programacion funcional pura no existen los bucles for ni while, todo resuelven con un maritllo y un yunque, todo lo resuelven con funciones de primer orden, funciones map, filter y reduce, evaluación peresoza, y ya que estamos, funciones anonimas, funciones parciales y monadas.
+solo esas tres cosas son suficientes para desarrollar un programa exacto y legible, nada de intrucciones **go to, breack, continue**, ahora surge una pregunta, ¿Es posible cambiar el estado de un programa sin recurrir a un bucle for o while?, aunque sinceramente, yo no puedo vivir sin un for in, la verdad sea dicha, te cuento que un mundo mejor si es posible, debes saber, que en el mundo de la programacion funcional pura no existen los bucles for ni while, todo resuelven con un martillo y un yunque, de un horno a altas temperaturas sale el acero listo a ser martillado con con funciones de primer orden, recurción, evaluación peresoza, y ya que estamos técnicos, funciones anonimas, evaluación parcial de funciones y monadas.
 
-De momento solo quedemonos con la habilidad de componer funciones, si **f(g(x))**, no te suena, dejame y te lo explico mejor, puedes tomar funciones dentro de otra funciones, tambien quedemonos con map, filter y reduce, son funciones de orden superior, y esposible evadir los bucles for y while por medio de estas.
+Mucha información de golpe es verdad, mas de momento solo quedemonos con las funciones de primer orden (tambien se recurre al termino ciudadanos de primera clase), una habilidad que nos permite pasar funciones como parametros, esa es la habilidad de componer funciones, si **(f.g)(x) = f(g(x))**, no te suena, dejame y te lo explico de otra forma, puedes encadenar funciones, como si de un tren se tratase, de forma tal que la salida de una funcion sean los datos de entrada de la siguiente función, como si trataramos con una cinta transportadora, donde los datos son colocados en la cinta, luego son transportados, hasta que son preprocesados en una estación A, al salir, viajan nuevamente por la cinta, hasta llegar a una estación B, donde procesados una vez mas, y asi sucesivamnete, pasando por cuantas estaciones sean necesarias hasta obtener nuestro producto. De esta forma es como vizualizo los stream de Java, esta analogía cinta aplica para las tuberías de Bash y otros lenguajes.
 
-Map, filter y reduce, son funciones que operan sobre colecciones de datos, ya sean listas, tuplas, diccionarios, entre otras, tomando como entrada, primeramente una funcion, y luego, una coleccion de datos, para luego realizar operaciones específicas sobre ellas.
+***
+Notación funcional: **model = f.g(x)**
+
+Notación Java: **model = (x).g.f** , (en java hablamos de objetos)
+***
+
+En Python no existe una notación de tubería, mas el mecanismo en esencia es el mismo, consiste en tomar funciones cualquieras y colocarlas una dentro de otra, en el orden que consideremos correcto (ese orden es nuestro algoritmo), como si de cajas se tratasen, luego python se encarga de desempaquetar esas cajas e ir encadenando esa cajas (o estaciones de trabajo), las unas con las otras en el mismo orden en el que nosotros lo hicimos.
+
+Cada vez que se habla de programación funcional se habla de **map, filter y reduce**, mas la programación funcional va mas allá, y en lo personal considero que la piedra fundacional es la habilidad de componer funciones, y es por ello, que estas funciones brillan tanto, dejame y te cuento, son funciones de primer orden que operan sobre colecciones de datos, ya sean listas, tuplas, diccionarios, entre otras, tomando como entrada, primeramente una funcion, y luego, una coleccion de datos, para despues realizar operaciones específicas sobre ellas. Veamos mas a continuación.
 
 ## Map
 
-La función **map()**, matemáticamente, es es tener una funcion **f(x)** que se aplica sobre cada elemento de un conjunto de datos iterables **A = {x1, x2, x3, ...}**, y ya tecnicamente, devuelve como resultado un objeto map, el cual es iterable.
+La función **map()**, matemáticamente, es es tener una funcion **f(x)** que se aplica sobre cada uno de los elementos del conjunto iterable de datos  **A = {x1, x2, x3, ...}**, y ya tecnicamente, devuelve como resultado un objeto map, el cual es iterable.
+
+Podemos tambien, reemplazar los bucles iterativos (for, while) por map, ejemplo:
+
+````python
+# bucle iterativo
+for elem in collection:
+    f(elem)
+
+# lo podemos reemplazar por
+map(f, collection)
+
+````
 
 Ejemplo:
 
@@ -83,7 +103,7 @@ print(squares)
 squares_list = list(squares)
 print(squares_list)  # Output: [1, 4, 9, 16, 25]
 ````
-Por tal motivo, en el ejemplo anterior se recurre a: **list**(squares). Ahora subamos un poquito el nivel:
+Como observamos, en el ejemplo anterior se recurre a: **list**(squares), Ahora un par de ejemplos mas:
 
 ````python
 do_it = lambda f, *args: f(*args)
@@ -105,19 +125,9 @@ Bye Jane Doe
 None
 ````
 
-````python
-for elem in collection:
-    f(elem)
-
-#lo podemos reemplazar por
-map(f, collection)
-
-````
-
-
 ## Filter
 
-La función **filter()**, filtra elementos de un conjunto de datos, funcionando algo parecido a como lo haría un tamiz en la vida real, es decir, toma solo aquellos elementos capaces de pasar por el **"tamiz"**, es decir, toma como entrada una funcion **f(x)** que hará de tamiz, para ello, esta debe ser una función que solo pueda devolver **TRUE** o **FALSE** como resultado, pues al aplicar dicha funcion sobre cada elemento del conjunto **A = {x1, x2, x3, ...}** , nos quedaremos solo coon los elementos que cumplan con los requisitos especificados en nuestra función de filtrado.
+La función **filter()**, filtra elementos de un conjunto de datos, funcionando algo parecido a como lo haría un tamiz en la vida real, es decir, toma solo aquellos elementos capaces de pasar o no, por el **"tamiz"**, es decir, toma como entrada una funcion **f(x)** que hará de tamiz, dejando pasar los elementos que cumpla con cierto requisitos, para ello, esta funcion test o de prueba, debe ser una función que solo pueda devolver **TRUE** o **FALSE** como resultado, para asi, despues de aplicar dicha funcion sobre cada elemento del conjunto **A = {x1, x2, x3, ...}** , nos quedaremos solo coon los elementos que cumplan con los requisitos especificados en nuestra función de filtrado.
 
 Ejemplo:
 ````python 
@@ -131,7 +141,7 @@ print(even_numbers_list)  # Output: [2, 4]
 
 ## Reduce
 
-La función reduce() reduce una secuencia de datos a un único valor aplicando una función determinada de forma acumulativa a los elementos, de izquierda a derecha. La función reduce() está disponible en el módulo functools.
+La función reduce() reduce una secuencia de datos a un único valor aplicando una función determinada de forma acumulativa a los elementos, de izquierda a derecha. La función reduce() está disponible en el módulo functools. 
 
 ````python 
 from functools import reduce
@@ -246,7 +256,7 @@ Fibonacci number 10 -> 34
 """
 ```
 
-Una notación alternativa muy similar a las listas por compresión donde tambien podemos usar funciones filtrado, pero en vez de usar corchetes, usamos parentesis, por ejemplo:
+Una notación alternativa, y muy similar a las listas por compresión donde tambien podemos usar funciones filtrado, pero en vez de usar corchetes, usamos parentesis, por ejemplo:
 
 ````python
 # una funcion lambda

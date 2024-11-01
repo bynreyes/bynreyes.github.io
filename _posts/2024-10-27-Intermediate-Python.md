@@ -15,12 +15,14 @@ comments: true
 
 Niklaus Wirth, En 1975, escribió el libro **Algorithms + Data Structures = Programs**, nunca he tenido ese libro en mis manos, pero ¡cuanta razon! no encuentro desperdicio en tal frase.
 
-En mi opinion y parafraceando al gran Niklaus, considero que para diseñar un programa, es necesario conocer profundamente las estructuras de datos que nos ofrece nuestra herramienta favorita, llamese esta  Python, Java, C#, puede ser una biblioteca en particular, tal como Pandas con sus omniopresentes data frames, en fin, resulta que, nuestro deber primero es elegir y escoger, esa estrucutura de datos que mejor represente nuestro problema a resolver, esa estructura que mejor se ajuste a nuestras necesidades, pues dependiendo de la estructura elegida podremos optar por un camino u otro, esos camionos de eleccion son los algoritmos, que manipulando eficientemente los datos, es como finalmente se logra obtener un programa correcto.
+En mi opinion y parafraceando al gran Niklaus, considero que para diseñar un programa, es necesario conocer profundamente las estructuras de datos que nos ofrece nuestra herramienta favorita, llamese esta  Python, Java, C#, puede ser una biblioteca en particular, tal como Pandas con sus omniopresentes data frames, en fin, resulta que, nuestro deber primero es elegir y escoger, esa estrucutura de datos que mejor represente nuestro problema a resolver, esa estructura que mejor se ajuste a nuestras necesidades, pues dependiendo de la estructura elegida podremos optar por un camino u otro, y son estos camionos de eleccion, lo que conocemos como algoritmos, por ultimo, manipulando eficientemente los datos, es como finalmente se logra obtener un programa correcto.
 
-Me gusta mucho Python, es verdad, pero programar puede hacerse en el lenguaje que prefieras o lo que te exija la universidad o el trabajo. Pues lo fundamental va más allá del lenguaje: consiste en, primeramente, es entender el problema en sí (nuestra ley cero de la termodinámica). Después, es necesario embonar los datos con las estructuras de datos adecuadas, es decir, seleccionar aquellas que permitan representar la información de manera eficiente, clara y concisa. Finalmente, el tercer paso es manipular estos bloques de datos de forma que se logre la funcionalidad deseada, optimizando así cada aspecto del programa.
+Me gusta mucho Python, es verdad, pero programar puede hacerse en el lenguaje que prefieras o lo que te exija la universidad o el trabajo. Pues lo fundamental va más allá del lenguaje, consiste en: 
+- Primeramente, entender el problema en sí (nuestra ley cero de la termodinámica). 
+- Después, es necesario embonar los datos con las estructuras de datos adecuadas, es decir, seleccionar aquellas que permitan representar la información de manera eficiente, clara y concisa. 
+- Finalmente, el tercer paso es manipular estos bloques de datos de forma que se logre la funcionalidad deseada, optimizando así cada aspecto del programa.
 
 Resumiendo, tenemos:
-
 1. Entender el problema. (nuestra ley cero de la termodinámica)
 2. Embonar Los datos con las estructuras de datos adecuadas.
 3. Manipular los bloques de datos.
@@ -34,10 +36,17 @@ Resumiendo, tenemos:
 - Colecciones
     - Listas
     - Tuplas
-    - Diccionarios
-- Range
-- Enumerate 
-- Zip
+    - Diccionarios 
+    - Conjuntos
+
+- Iterando con range y enumerate
+  - Range
+  - Enumerate 
+
+- Un par de condimentos
+  - len
+  - Zip
+  - All, Any 
 ***
 
 
@@ -63,9 +72,69 @@ Python ofrece varias estructuras de datos, como los heaps o monticulos, los conj
 Es una colección de datos, mutable y heterogenea, basada en un lista enlazada (linkend list), donde podemos acceder a los elementos de dicha lista por medio de un subindice. Podemos crear una lista, con un para de corchetes y dentro colocar los elementos que querramos, eso si, los elementos deben estar separados por comas.
 
 Por otro lado, en Java tenemos los arreglos y las listas enlazadas, ambas colecciones mutables y homogeneas.
-
+- .sort()
+- .reverse()
+- .append()
+- .remove()
+- .pop()
+- concatenacion
+- slicing
 ## Tuplas
-Son estructuras de datos inmutables, es decir una vez intanciada, no puedo modificar sus parametros, del resto, son estructuras muy similares a las listas,  es heterogenea, puedo almacenar datos de distintos tipos y comparten los mismos metodos de manipulación exeptuando aquellos que provoquen un cambio de estado. Podemos crear una tupla por medio de un par de parentesis, y colocxando dentro los elementos que querramos almacenar, separados por coma.
+Son estructuras de datos inmutables, es decir una vez intancializada, no puedo modificar sus parametros, del resto, son estructuras muy similares a las listas,  es heterogenea, puedo almacenar datos de distintos tipos, mas no puedo usar funciones que provoquen un cambio de estado, Es decir, es valido:
+
+````python
+mi_tupla = ("yeloww", "correr", (5, 12))
+len(my_tupla)
+
+````
+mas lo siguiente nos generara un error:
+````python
+mi_tupla.append("carlos")
+mi_tupla.pop(yellow)
+````
+mas lo siguiente si es valido
+````python
+mi_tupla = ("yeloww", "correr", (5, 12))
+print(mi_tupla)
+# transformarla a lista que si es un objeto mutable
+personaje = list(mi_tupla)
+personaje.append("carlos")
+mi_tupla = tuple(personaje)
+print(mi_tupla)
+````
+Como vemos, podemos crear una tupla por medio de un par de parentesis, y colocando dentro los elementos que querramos almacenar, separados por coma, pero python nos guarda mas secretos, uno muy especial y mágico, el desenpaquetado, veamos:
+
+````python
+colores = ("rojo", "verde", "azul", "cyan", "magenta")
+(bici, dron, moto, laptop, phone) = colores
+print(bici)
+print(dron)
+print(moto)
+print(laptop)
+print(phone)
+````
+````python
+(bici, dron, *moto) = colores
+print(bici)
+print(dron)
+print(moto)
+print("======================")
+(bici, *dron, moto) = colores
+print(bici)
+print(dron)
+print(moto)
+print("======================")
+(*bici, dron, moto) = colores
+print(bici)
+print(dron)
+print(moto)
+````
+````pytthon
+(bici, dron, moto) = colores
+print(bici)
+print(dron)
+print(moto)
+````
 
 ## Diccionarios
 son estructuras de datos clave-valor, los puedes conseguir en otros lengujes, como Java, C#, bajo el nombre HashMap. Los diccionarios son colleciones de datos  de pares clave-valor, estan desordenados, tienen barbaridad de metodos, mas empecemos por el principio:
@@ -75,18 +144,119 @@ son estructuras de datos clave-valor, los puedes conseguir en otros lengujes, co
   - Podemos usar un par de llaves (curly brakes) para crear un diccionario.
   - utlilizamos un par de puntos para separar una clave de su valor, y una coma para separarar las parejas clave-valor dentro de la colección
   - Son estructuras de datos mutables, al poder eliminar o adicionar nuevas parejas clave-valor, modificar el valor de uina clave, etc.
+
+Metodos mas comunes:
+- .get()
+- .keys()
+- .values()
+- .items()
+
+````python
+#For para llenar un diccionario con llaves.
+lista_llaves = ["nombre", "apellido", "edad"]
+diccionario = {}
+
+for llave in lista_llaves:
+  diccionario[key] = input("Ingrese la información: ")
+
+print(diccionario)
+````
+````python
+<nombre_diccionario> = {<new_key>:<new_value> for <item> in <iterable> if <test>}
+````
+
+````python
+# por compresión.
+lista_llaves = ["nombre", "apellido", "edad"]
+diccionario = {k: input(f"Ingrese el {k}: ") for k in lista_llaves}
+
+print(diccionario)
+````
+
+````python
+<nombre_diccionario> = {<new_key>:<new_value> for <key, value> in <iterable> if <test>}
+````
+
+````python
+colores = ("rojo", "verde", "azul", "cyan", "magenta")
+variables = ("bici", "dron", "moto", "laptop", "phone")
+
+# diccionario por compresion
+objetos = {k: v for k, v in zip(variables, colores)}
+
+# iterando con .keys()
+for index, key in enumerate(objetos.keys(), 1):
+    print(f'key:{index} -> {key}')
+print()
+
+# iterando con .values()
+for index, value in enumerate(objetos.values(), 1):
+    print(f'value:{index} ->  {value}')
+print()
+
+# iterando con .items()
+for index, item in enumerate(objetos.items(), 1):
+    print(f'tupla: {index} -> {item}')
+print()
+
+# por ultimo
+for key, value in objetos.items():
+    print(f'{key} -> {value}')
+````
+
+## Iterando con Range y Enumerate
 ## Range
 
 Es una funcion que devuelve una secuencia de numeros, por defecto comienza en cero y con paso uno, incrementa hasta donde le indiquemos.
 ***
 range(start = 0, stop, step = 1)
 ***
+
+````python
+start, stop, step = (1, 10, 2)
+for x in range(1, 20, 2):
+    print(x)
+````
+
+````python
+# una tabla de potencias
+n = 10
+f = lambda x, y: x**y
+tabla = {k: [f(k, y)  for y in range(1, n + 1)] for k in range(2, n + 1)}
+
+for k, v in tabla.items():
+    print(f'{k}: {v}') 
+````
+
 ## Enumerate
 Es una funcion que toma un iterable y retorna un objeto enumetrate, un objeto iterable.
 
 ***
 enumerate(iterable, start = 0)
 ***
+````python
+to_do = ["estudiar", "correr", "comer frutas", "hidratarse", "descansar"] 
+for index, value in enumerate(to_do, 1):
+    print(f'{index}. Es hora de: {value}')
+````
+````python
+# unpacking
+init, stop = (1, 10)
+
+# una lista de cuadrados
+cuadrados = [x**2 for x in range(init, stop + 1)]
+
+# un bucle for + enumerate pa recorrer la lista
+for index, value in enumerate(cuadrados, init):
+    print(f'{index}^2 = {value}')
+````
+
+## Un par de Condimentos
+A continuación un par de funciones de primer orden, que en mayor o menor medida, nos será de mucha utilidad a la hora de procesar nuestras colecciones de datos.
+
+## Len
+Es simple, la funcion len retorna la cantidad de elementos almacenados en una coleeción.
+
 ## Zip
 
 zip es una función que recibe de entrada uno o mas objetos iterables y devuelve un objeto zip iterable, por lo que debemos recurrir a la función **next()**, para consumir uno a uno los elementos del iterable, un bucle **for in** de toda la vida, o tambien podemos usar la función **list()**, veamos a continuación un ejemplo:
@@ -124,7 +294,7 @@ Sistemas Digitales fue aprobado con: 3.5 puntos.
 
 Como vemos, zip por si solo, nos devuelve un objeto para nada legible al ojo humano, y como no hablo taka taka, es necesario recurrir a **list()**, para ver que ha pasado, recurrir a **nex()** tambien hubiera funcionado, y ¿que es lo que observamos?, bueno te puedo responder que observamos lo esperado, **zip()** toma dos listas y combina los elementos uno a uno en una tupla, toma los elementos en el mismo orden y empezando por el indice 0. Ahora, cabe acotar, que si los elementos a combinar no guardan la misma cantidad de elementos, creanme que zip termina donde cuando la coleccion mas pequeña no tenga mas elementos que combinar.
 
- A xontinuación un par de ejemplos mas:
+A continuación un par de ejemplos mas:
 
 ````python
 # create a list of names
@@ -176,8 +346,38 @@ print(names)  # ('John', 'Jane', 'Alice')
 print(ages)   # (20, 22, 25)
 
 ````
+## All, Any
+All y any son funciones que aceptan como parametro una funcion de filtrado, y un iterable, para a continuación retornar un booleano, true o false. 
 
+All devuelve true, si al evaluar filtro(x) es verdadero, para todos los elementos x del conjuinto a evaluar.
+
+Any, por otro lado, devuelve true, si al evaluar filtro(x) es verddadero, para cualquier elemento  x del conjunto a evaluar, es decir, si tan solo un elemento retorna true, any nos retornará true.
+
+Recopilando, podemos equiparar any con or y all con and, solo que estas son mas flessibles, y por ultimo, es importante mencionar que, la función de filtrado por defecto, es bool(x).
+
+````python
+ n = 100
+# una lista de primos
+primos = [x for x in range(2, nc ) if all(x % y != 0 for y in range(2, x))]
+print(primos)
+
+# output:
+[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+
+````
+
+````python
+from math import sqrt
+
+num = int(input("Ingrese un numero: "))
+n = int(sqrt(num))
+
+test_all = all(num % i != 0 for i in range(2, n + 1))
+test_any = any(num % i == 0 for i in range(2, n + 1))
+
+print(f'{num} es un numero primo') if not test_any else print(f'{num} no es un numero primo')
+````
 
 ## Bibliografía
-- https://es.wikipedia.org/wiki/Niklaus_Wirth
-- https://docs.python.org/3/tutorial/controlflow.html#match-statements
+* [Niklaus Wirth](https://es.wikipedia.org/wiki/Niklaus_Wirth)
+* [Python Docs](https://docs.python.org/es/3/tutorial/index.html)
