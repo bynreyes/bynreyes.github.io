@@ -29,7 +29,7 @@ Te ayudaré con ejercicios de Python organizados por niveles de dificultad. Los 
 8. Crea un programa que convierta temperatura de Celsius a Fahrenheit y viceversa
 9. Desarrolla una función que cuente las palabras en una oración
 10. Escribe un programa que sume todos los números en una lista
-11. rea una función que verifique si una palabra es palíndromo
+11. Crea una función que verifique si una palabra es palíndromo
 12. Desarrolla un programa que genere una tabla de multiplicar
 13. Escribe una función que elimine los espacios en blanco de una cadena
 14. Crea un programa que calcule el área de diferentes figuras geométricas
@@ -41,6 +41,7 @@ Te ayudaré con ejercicios de Python organizados por niveles de dificultad. Los 
 
 - un numero es par si este, es divisible por 2, es decir, **x mod 2 = 0**
 - En python el operador modulo es:  %
+
 ````python
 # determine si un número es par o impar: if ternario
 n = int(input("digite un numero: "))
@@ -59,8 +60,10 @@ def es_par(x):
 n = int(input("digite un numero: "))
 es_par(n)
 ````
+
 ### Factorial de un número
 - solo aplica para numeros positivos
+
 ````python
 # factorial de un numero: solucion imperativa
 def factorial(x):
@@ -116,10 +119,8 @@ def contar_vocales(x):
 print(f'la palabra {word} tiene {contar_vocales(aux)} vocales')
 ````
 
-A continuación  contar las vocales en una cadena de texto: sum()  y count() function, 
+A continuación  contar las vocales en una cadena de texto, de una forma mas natural con sum()  y count() function. **word.count(x)** retorna cuantas veces aparece x dentro de word, luego, otra cosa, por lo general, todo for lo puedo reemplazar por un list compresion. Continuando, contamos cuantas veces aparece la a, luego cuantas veces aparece la vocal e, y asi sucesivamente, para finalmente, sumar todo con **sum()**.
 
-word.count(x) retorna cuantas veces aparece x dentro de word, luego, por lo general, todo for lo puedo reemplazar por un list compresion
-considero esta es la solucion mas coherente, o mas natural, contar cuantas veces aparece la a, luego cuantas veces aparece la vocal e, y asi sucesivamente, para finalmente, sumar todo.
 ````python
 # contar las vocales en una cadena de texto: sum()  y count() function
 vocales = ("a", "e", "i", "o", "u")
@@ -144,6 +145,7 @@ print(f'la palabra {word}, tiene  {cantidad_vocales} vocales')
 
 ### Escribe un programa que genere la serie Fibonacci hasta n términos
 supongo que si **n=10**, no se me pide hallar **f(10)**, mas bien, lo que se me pide son los diez primeros numeros de la serie
+
 ````python
 # serie Fibonacci hasta n términos: solución imperativa 
 n = 12
@@ -180,23 +182,64 @@ for i, num in enumerate(data, 1):
 
 ### Crea una función que invierta una cadena de texto
 
+Primeramente de forma imperativa con un bucle for, pues supongo que esto es lo que lo que piden, cuando hacen referencia a no usar funciones integradas. La verdad no voy a saer tan estricto ya veremos otras aproximaciones.
+
 ````python
 # inviertir una cadena de texto: forma imperativa
 word = 'Ají traga la lagartija'
-def mirror(word):
-    for c in reversed(word):
-        print(c, end="")
+reves = ""
+# range(start, stop, step)
+for i in range(len(word) -1, -1, -1):
+    reves += word[i ]
 
-mirror(word)
+print(reves)
+````
+Cundo se trabaja con string, muy probablemente uses los metodos: **.join(), .split()** 
+````python
+# inviertir una cadena de texto: forma natural
+word = 'Ají traga la lagartija'
+reves = "".join(c for c in reversed(word))
+print(reves)
+````
 
+lo siguiente son los Slice de python, no estoy seguro que esto se pueda hacer en otros lenguajes.
+
+````python
 # inviertir una cadena de texto: slice
 word = str(input("ingrese un texto: "))
 mirror = lambda word: print(f'{word} reves: {word[::-1]}')
 mirror(word)
 ````
 
+
 ### Desarrolla un programa que determine si un año es bisiesto
-ni idea, tengo que investigar porque un año es bisiesto
+investigando, un poco, encuentro que un año es bisiesto cuando:
+1. es divisible por 4 y no por 100
+2. ser divisible por 400
+
+entonces: 
+
+````python
+# test and test or test: se comporta como un if ternario
+es_bisiesto = lambda x: x % 4 == 0 and x % 100 != 0 or x % 400 == 0 
+
+# años ramdon para probar la funcion lambda
+d = {"bisiesto": [2016, 2016, 2020, 2024, 2028,	2032, 2036, 2040 ,2044, 2048]}
+a = [2000, 1900, 2007, 2024, 2022, 1996, 1700]
+b = [randint(1700,3000) for x in range(10)]
+
+
+for x in a:
+    print(f'{x} es bisiesto') if es_bisiesto(x) else print(f'{x} no es bisiesto')
+    
+print("=======================================")
+for x in d["bisiesto"]:
+    print(f'{x} es bisiesto') if es_bisiesto(x) else print(f'{x} no es bisiesto')
+    
+print("=======================================")
+for x in b:
+    print(f'{x} es bisiesto') if es_bisiesto(x) else print(f'{x} no es bisiesto')
+````
 
 ### Escribe una función que encuentre el número más grande en una lista
 se puede abordar con max, no veo mayor dificultad, exploraremos varios acercamientos
@@ -394,7 +437,7 @@ las diferentes figuras seran:
 - rectangulo
 - cuadrados
 
-ajuste de patrones match-case para los panas.
+Primeramente con, ajuste de patrones o pattern matching, match-case para los panas, una estructura versatil, mas similar a haskell, que al vulgar switch-case que puedes encontrar en otros lenguajes.
 
 ````python
 def circulo():
@@ -415,7 +458,7 @@ def rectangulo():
     h = int(input("digite la altura del rectangulo: "))
     return "rectangulo", b*h
 
-    acciones = {
+acciones = {
     1: cirdulo,
     2: cuadrado,
     3: triangulo,
@@ -445,55 +488,7 @@ def menu_area():
 
 menu_area()
 ````
-
-````python
-def circulo():
-    r = int(input("digite el radio del circulo: "))
-    return "circulo", 3.1416 * r**2
-
-def cuadrado():
-    l = int(input("digite el lado del cuadrado: "))
-    return "cuadrado", l**2
-    
-def triangulo():
-    b = int(input("digite la base del triangulo: "))
-    h = int(input("digite la altura del triangulo: "))
-    return "triangulo", (b*h)/2
-
-def rectangulo():
-    b = int(input("digite la base del rectangulo: "))
-    h = int(input("digite la altura del rectangulo: "))
-    return "rectangulo", b*h
-
-acciones = {
-    1: circulo,
-    2: cuadrado,
-    3: triangulo,
-    4: rectangulo
-}
-
-def menu_area():
-    while True:
-        print("1. Circulo")
-        print("2. Cuadrado")
-        print("3. Triangulo")
-        print("4. Rectangulo")
-        print("5. Salir")
-        print("digite una opcion: ", end="")
-        opcion = int(input())
-        if opcion == 5:
-            break
-        elif opcion in acciones:
-            fig, area = acciones.get(opcion)() 
-            print(f'el area del {fig} es: {area}') 
-            print("==============================")
-        else:
-            print("opcion invalida")
-            print("==============================")
-       
-
-menu_area()
-````
+Puede ser mas simple, lo siento, mas la verdad lo escribi de tal forma solo por practicar, creanme que la estructura match-case es versatil y hasta mágica.
 
 ### Desarrolla una función que convierta un número decimal a binario
 
